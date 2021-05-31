@@ -1,0 +1,10 @@
+sewar
+scipy==1.2.0
+image-quality
+opencv-python
+numpy
+tqdm
+scikit-video
+Pillow
+imagecodecs
+tifffile
