@@ -1,12 +1,12 @@
 from torch.utils import data as data
 from torchvision.transforms.functional import normalize
 
-from basicsr.data.data_util import (paired_paths_from_folder,
-                                    paired_paths_from_lmdb,
-                                    paired_paths_from_meta_info_file)
-from basicsr.data.transforms import augment, paired_random_crop
-from basicsr.utils import FileClient, imfrombytes, img2tensor
-from basicsr.utils.registry import DATASET_REGISTRY
+from core.data.data_util import (paired_paths_from_folder,
+                                 paired_paths_from_lmdb,
+                                 paired_paths_from_meta_info_file)
+from core.data.transforms import augment, paired_random_crop
+from core.utils import FileClient, imfrombytes, img2tensor
+from core.utils.registry import DATASET_REGISTRY
 
 
 @DATASET_REGISTRY.register()

@@ -4,8 +4,8 @@ import numpy as np
 from scipy.ndimage.filters import convolve
 from scipy.special import gamma
 
-from basicsr.metrics.metric_util import reorder_image, to_y_channel
-from basicsr.utils.registry import METRIC_REGISTRY
+from core.metrics.metric_util import reorder_image, to_y_channel
+from core.utils.registry import METRIC_REGISTRY
 
 
 def estimate_aggd_param(block):

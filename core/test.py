@@ -2,12 +2,12 @@ import logging
 import torch
 from os import path as osp
 
-from basicsr.data import build_dataloader, build_dataset
-from basicsr.models import build_model
-from basicsr.train import parse_options
-from basicsr.utils import (get_env_info, get_root_logger, get_time_str,
-                           make_exp_dirs)
-from basicsr.utils.options import dict2str
+from core.data import build_dataloader, build_dataset
+from core.models import build_model
+from core.train import parse_options
+from core.utils import (get_env_info, get_root_logger, get_time_str,
+                        make_exp_dirs)
+from core.utils.options import dict2str
 
 
 def test_pipeline(root_path):

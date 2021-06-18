@@ -1,6 +1,6 @@
 # License and Acknowledgement
 
-The project is initially based on [BasicSR](https://github.com/xinntao/BasicSR) repository. Thanks to the author [Xintao Wang](https://xinntao.github.io/) for the awersome code! Here is the [license](LICENSE-basicsr) of basicsr.
+The project is initially based on [BasicSR](https://github.com/xinntao/BasicSR) repository. Thanks to the author [Xintao Wang](https://xinntao.github.io/) for the awersome code! Here is the [license](LICENSE-basicsr) of core.
 
 ## References
 

@@ -4,8 +4,9 @@ import torch.nn as nn
 from scipy import linalg
 from tqdm import tqdm
 
-from basicsr.archs.inception import InceptionV3
-from basicsr.utils.registry import METRIC_REGISTRY
+from core.archs.inception import InceptionV3
+from core.utils.registry import METRIC_REGISTRY
+
 
 def load_patched_inception_v3(device='cuda',
                               resize_input=True,

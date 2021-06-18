@@ -23,11 +23,12 @@ if os.path.exists(filename):
         images_metainfo_json = json.load(json_file)
 else:
     # download and save metainformation
-    result = requests.get("https://api.openaerialmap.org/meta/?gsd_from=0.01&gsd_to=0.02")
+    result = requests.get(
+        "https://api.openaerialmap.org/meta/?gsd_from=0.01&gsd_to=0.02")
     images_metainfo_json = json.loads(result.text)
     with open(filename, 'w') as outfile:
         json.dump(images_metainfo_json, outfile)
-    
+
 
 images_metainfo_results = images_metainfo_json["results"]
 
@@ -44,8 +45,8 @@ for image_info in images_metainfo_results:
     if not os.path.exists(image_save_path):
         print()
         file = open(image_save_path, "wb")
-        if total_length is None: # no content length header
-            sys.stdout.write(i, " / ", len(images_metainfo_results), "\n")    
+        if total_length is None:  # no content length header
+            sys.stdout.write(i, " / ", len(images_metainfo_results), "\n")
         else:
             dl = 0
             total_length = int(total_length)
@@ -53,12 +54,11 @@ for image_info in images_metainfo_results:
                 dl += len(data)
                 file.write(data)
                 done = int(50 * dl / total_length)
-                sys.stdout.write("\r%i/%i [%s%s] %s/%s Mb." % (i, len(images_metainfo_results), '=' * done, ' ' * (50-done), dl // (1024 * 1024), total_length // (1024 * 1024)))
+                sys.stdout.write("\r%i/%i [%s%s] %s/%s Mb." % (i, len(images_metainfo_results),
+                                 '=' * done, ' ' * (50-done), dl // (1024 * 1024), total_length // (1024 * 1024)))
                 sys.stdout.flush()
 
         file.close()
     i += 1
 
 print("Finished downloading files!")
-
-

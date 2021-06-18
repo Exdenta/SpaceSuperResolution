@@ -2,8 +2,8 @@ import importlib
 from copy import deepcopy
 from os import path as osp
 
-from basicsr.utils import get_root_logger, scandir
-from basicsr.utils.registry import MODEL_REGISTRY
+from core.utils import get_root_logger, scandir
+from core.utils.registry import MODEL_REGISTRY
 
 __all__ = ['build_model']
 
@@ -17,7 +17,7 @@ model_filenames = [
 ]
 # import all the model modules
 _model_modules = [
-    importlib.import_module(f'basicsr.models.{file_name}')
+    importlib.import_module(f'core.models.{file_name}')
     for file_name in model_filenames
 ]
 

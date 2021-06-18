@@ -72,7 +72,7 @@ def convert_model(pytorch_model: nn.Module, onnx_save_path: str):
 
 
 def convert_esrgan_model(pytorch_model_path: str, onnx_save_path: str, device: str = 'cpu'):
-    from basicsr.archs.rrdbnet_arch import RRDBNet
+    from core.archs.rrdbnet_arch import RRDBNet
     '''
     Converts Esrgan
     '''
@@ -102,7 +102,7 @@ def convert_esrgan_model(pytorch_model_path: str, onnx_save_path: str, device: s
 
 
 def test_esrgan_model(pytorch_model_path: str, onnx_model_path: str, result_dirname: str, device: str = 'cpu'):
-    from basicsr.archs.rrdbnet_arch import RRDBNet
+    from core.archs.rrdbnet_arch import RRDBNet
     # read image
     image_path = r"H:\Datasets\increase-image-resolution-using-superresolution\dataset_30sm\val\low_res\000014809.jpg"
     image = cv2.imread(image_path, cv2.IMREAD_COLOR).astype(np.float32) / 255.
@@ -169,7 +169,7 @@ def test_esrgan_model(pytorch_model_path: str, onnx_model_path: str, result_dirn
 
 #  crt_net_path: str
 def convert_edsr_model(pytorch_model_path: str, onnx_save_path: str, device: str = 'cpu', num_block=32):
-    from basicsr.archs.edsr_arch import EDSR
+    from core.archs.edsr_arch import EDSR
     """ Converts EDSR model
     Args:
         pytorch_model_path (str): Current network path.
@@ -201,7 +201,7 @@ def convert_edsr_model(pytorch_model_path: str, onnx_save_path: str, device: str
 
 
 def test_edsr_model(pytorch_model_path: str, onnx_model_path: str, result_dirname: str, device: str = 'cpu'):
-    from basicsr.archs.edsr_arch import EDSR
+    from core.archs.edsr_arch import EDSR
     # read image
     image_path = r"H:\Datasets\increase-image-resolution-using-superresolution\dataset_30sm\val\low_res\000014809.jpg"
     image = cv2.imread(image_path, cv2.IMREAD_COLOR).astype(np.float32) / 255.

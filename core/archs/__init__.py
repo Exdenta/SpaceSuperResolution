@@ -2,8 +2,8 @@ import importlib
 from copy import deepcopy
 from os import path as osp
 
-from basicsr.utils import get_root_logger, scandir
-from basicsr.utils.registry import ARCH_REGISTRY
+from core.utils import get_root_logger, scandir
+from core.utils.registry import ARCH_REGISTRY
 
 __all__ = ['build_network']
 
@@ -17,7 +17,7 @@ arch_filenames = [
 ]
 # import all the arch modules
 _arch_modules = [
-    importlib.import_module(f'basicsr.archs.{file_name}')
+    importlib.import_module(f'core.archs.{file_name}')
     for file_name in arch_filenames
 ]
 
