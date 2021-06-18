@@ -312,6 +312,8 @@ path:
 val:
   # Whether to save images during validation
   save_img: true
+  # Number of images from validation dataset to save
+  save_img_num: 100
   # Suffix for saved images. If None, use exp name
   suffix: ~
 

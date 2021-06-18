@@ -229,7 +229,7 @@ def train_pipeline(root_path):
             if opt.get('val') is not None and (current_iter %
                                                opt['val']['val_freq'] == 0):
                 model.validation(val_loader, current_iter, tb_logger,
-                                 opt['val']['save_img'])
+                                 opt['val']['save_img'], save_img_num=opt['val']['save_img_num'])
 
             data_time = time.time()
             iter_time = time.time()
@@ -245,7 +245,7 @@ def train_pipeline(root_path):
     model.save(epoch=-1, current_iter=-1)  # -1 stands for the latest
     if opt.get('val') is not None:
         model.validation(val_loader, current_iter, tb_logger,
-                         opt['val']['save_img'])
+                         opt['val']['save_img'], save_img_num=opt['val']['save_img_num'])
     if tb_logger:
         tb_logger.close()
 

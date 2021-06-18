@@ -9,8 +9,8 @@ datasets:
   train:
     name: Argis
     type: PairedImageDataset
-    dataroot_gt: datasets/Argis/dataset_20sm/train/high_res
-    dataroot_lq: datasets/Argis/dataset_20sm/train/low_res
+    dataroot_gt: datasets/Argis/dataset_30sm_gauss_001_speckle_001_noise/train/high_res
+    dataroot_lq: datasets/Argis/dataset_30sm_gauss_001_speckle_001_noise/train/low_res
     filename_tmpl: '{}'
     io_backend:
       type: disk
@@ -31,8 +31,8 @@ datasets:
   val:
     name: Argis
     type: PairedImageDataset
-    dataroot_gt: datasets/Argis/dataset_20sm/val/high_res
-    dataroot_lq: datasets/Argis/dataset_20sm/val/low_res
+    dataroot_gt: datasets/Argis/dataset_30sm_gauss_001_speckle_001_noise/val/high_res
+    dataroot_lq: datasets/Argis/dataset_30sm_gauss_001_speckle_001_noise/val/low_res
     filename_tmpl: '{}'
     io_backend:
       type: disk

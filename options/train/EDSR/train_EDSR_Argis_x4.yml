@@ -1,17 +1,29 @@
 # general settings
-name: 16_EDSR_x4_30sm_Argis_pretrained
+name: 18_EDSR_x4_30sm_Argis_gauss_001_speckle_001_pretrained
 model_type: SRModel
 scale: 4
 num_gpu: 1  # set num_gpu: 0 for cpu mode
 manual_seed: 10
+
+# datasets/Argis/dataset_30sm_gauss_001_speckle_001_noise/train/high_res
+# iters: 200
+# psnr: 25.8946
+# ssim: 0.7243
+# niqe: 10.1381
+
+# datasets/Argis/dataset_30sm_speckle_001_noise/train/high_res
+# iters: 200
+# psnr: 27.8870
+# ssim: 0.7741
+# niqe: 10.0007
 
 # dataset and data loader settings
 datasets:
   train:
     name: Argis
     type: PairedImageDataset
-    dataroot_gt: datasets/Argis/dataset_30sm/train/high_res
-    dataroot_lq: datasets/Argis/dataset_30sm/train/low_res
+    dataroot_gt: datasets/Argis/dataset_30sm_speckle_001_noise/train/high_res
+    dataroot_lq: datasets/Argis/dataset_30sm_speckle_001_noise/train/low_res
     filename_tmpl: '{}'
     io_backend:
       type: disk
@@ -33,8 +45,8 @@ datasets:
   val:
     name: Argis
     type: PairedImageDataset
-    dataroot_gt: datasets/Argis/dataset_30sm/val/high_res
-    dataroot_lq: datasets/Argis/dataset_30sm/val/low_res
+    dataroot_gt: datasets/Argis/dataset_30sm_speckle_001_noise/val/high_res
+    dataroot_lq: datasets/Argis/dataset_30sm_speckle_001_noise/val/low_res
     filename_tmpl: '{}'
     io_backend:
       type: disk
@@ -81,8 +93,9 @@ train:
 
 # validation settings
 val:
-  val_freq: !!float 5e3
+  val_freq: !!float 1e2
   save_img: true
+  save_img_num: 10
 
   metrics:
     psnr: # metric name, can be arbitrary

@@ -51,7 +51,8 @@ def test_pipeline(root_path):
             test_loader,
             current_iter=opt['name'],
             tb_logger=None,
-            save_img=opt['val']['save_img'])
+            save_img=opt['val']['save_img'],
+            save_img_num=opt['val']['save_img_num'])
 
 
 if __name__ == '__main__':
