@@ -294,13 +294,13 @@ class StyleGAN2Model(BaseModel):
             self.net_g_ema.eval()
             self.output, _ = self.net_g_ema([self.fixed_sample])
 
-    def dist_validation(self, dataloader, current_iter, tb_logger, save_img: bool, save_img_num: int):
+    def dist_validation(self, dataloader, current_iter, tb_logger, save_img: bool, save_img_names: list):
         if self.opt['rank'] == 0:
             self.nondist_validation(dataloader, current_iter, tb_logger,
-                                    save_img, save_img_num)
+                                    save_img, save_img_names)
 
     def nondist_validation(self, dataloader, current_iter, tb_logger,
-                           save_img: bool, save_img_num: int):
+                           save_img: bool, save_img_names: list):
         assert dataloader is None, 'Validation dataloader should be None.'
         self.test()
         result = tensor2img(self.output, min_max=(-1, 1))

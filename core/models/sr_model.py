@@ -111,14 +111,14 @@ class SRModel(BaseModel):
             self.output = self.net_g(self.lq)
         self.net_g.train()
 
-    def dist_validation(self, dataloader, current_iter, tb_logger, save_img: bool, save_img_num: int):
+    def dist_validation(self, dataloader, current_iter, tb_logger, save_img: bool, save_img_names: list):
         logger = get_root_logger()
         logger.info('Only support single GPU validation.')
         self.nondist_validation(dataloader, current_iter,
-                                tb_logger, save_img, save_img_num)
+                                tb_logger, save_img, save_img_names)
 
     def nondist_validation(self, dataloader, current_iter, tb_logger,
-                           save_img: bool, save_img_num: int):
+                           save_img: bool, save_img_names: list):
         dataset_name = dataloader.dataset.opt['name']
         with_metrics = self.opt['val'].get('metrics') is not None
         if with_metrics:
@@ -144,7 +144,7 @@ class SRModel(BaseModel):
             del self.output
             torch.cuda.empty_cache()
 
-            if save_img and idx < save_img_num:
+            if save_img and ((img_name in save_img_names) or not save_img_names):
                 if self.opt['is_train']:
                     save_img_path = osp.join(self.opt['path']['visualization'],
                                              img_name,

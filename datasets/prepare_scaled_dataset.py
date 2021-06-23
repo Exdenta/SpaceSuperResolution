@@ -163,9 +163,9 @@ def prepare_dataset(images_dir: str, split_rate: float,
                     out_dataset_dirname: str):
 
     hr_train_dir = os.path.join(out_dataset_dirname, "train/high_res")
-    hr_val_dir = os.path.join(out_dataset_dirname, "val/high_res")
     lr_train_dir = os.path.join(out_dataset_dirname, "train/low_res")
-    lr_val_dir = os.path.join(out_dataset_dirname, "val/low_res")
+    hr_val_dir = os.path.join(out_dataset_dirname,   "val/high_res")
+    lr_val_dir = os.path.join(out_dataset_dirname,   "val/low_res")
 
     images_names = os.listdir(images_dir)
     images_count = len(images_names)

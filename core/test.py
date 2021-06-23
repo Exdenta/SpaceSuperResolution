@@ -52,7 +52,7 @@ def test_pipeline(root_path):
             current_iter=opt['name'],
             tb_logger=None,
             save_img=opt['val']['save_img'],
-            save_img_num=opt['val']['save_img_num'])
+            save_img_names=opt['val']['save_img_names'])
 
 
 if __name__ == '__main__':

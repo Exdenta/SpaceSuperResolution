@@ -5,6 +5,8 @@ import math
 import random
 import time
 import torch
+import os
+import cv2
 from os import path as osp
 
 from core.data import build_dataloader, build_dataset
@@ -148,6 +150,26 @@ def train_pipeline(root_path):
                 'name'] and opt['rank'] == 0:
             mkdir_and_rename(osp.join('tb_logger', opt['name']))
 
+    # save gt and interpolated images to visualization folder for visual comparison during training
+    for image_name in opt['val']['save_img_names']:
+        gt_images_dir = opt['datasets']['val'].get('dataroot_gt')
+        lq_images_dir = opt['datasets']['val'].get('dataroot_lq')
+        vis_dir = opt['path']['visualization']
+        image_extension = os.listdir(gt_images_dir)[0].split(".")[-1]
+        image_path = image_name + "." + image_extension
+        os.makedirs(os.path.join(vis_dir, image_name), exist_ok=True)
+        image_name = osp.join(image_name, image_name)
+        # save gt image
+        image_gt_name = image_name + "_gt." + image_extension
+        image = cv2.imread(osp.join(gt_images_dir, image_path))
+        w, h, _ = image.shape
+        cv2.imwrite(osp.join(vis_dir, image_gt_name), image)
+        # save interpolated image
+        interpolated_image_name = image_name + "_interpolated." + image_extension
+        image = cv2.imread(osp.join(lq_images_dir, image_path))
+        image = cv2.resize(image, (w, h), interpolation=cv2.INTER_CUBIC)
+        cv2.imwrite(osp.join(vis_dir, interpolated_image_name), image)
+
     # initialize loggers
     logger, tb_logger = init_loggers(opt)
 
@@ -229,7 +251,7 @@ def train_pipeline(root_path):
             if opt.get('val') is not None and (current_iter %
                                                opt['val']['val_freq'] == 0):
                 model.validation(val_loader, current_iter, tb_logger,
-                                 opt['val']['save_img'], save_img_num=opt['val']['save_img_num'])
+                                 opt['val']['save_img'], save_img_names=opt['val']['save_img_names'])
 
             data_time = time.time()
             iter_time = time.time()
@@ -245,7 +267,7 @@ def train_pipeline(root_path):
     model.save(epoch=-1, current_iter=-1)  # -1 stands for the latest
     if opt.get('val') is not None:
         model.validation(val_loader, current_iter, tb_logger,
-                         opt['val']['save_img'], save_img_num=opt['val']['save_img_num'])
+                         opt['val']['save_img'], save_img_names=opt['val']['save_img_names'])
     if tb_logger:
         tb_logger.close()
 

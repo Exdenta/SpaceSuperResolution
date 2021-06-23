@@ -34,7 +34,7 @@ class BaseModel():
         """Save networks and training state."""
         pass
 
-    def validation(self, dataloader, current_iter, tb_logger, save_img=False, save_img_num=0):
+    def validation(self, dataloader, current_iter, tb_logger, save_img=False, save_img_names=list()):
         """Validation function.
 
         Args:
@@ -45,10 +45,10 @@ class BaseModel():
         """
         if self.opt['dist']:
             self.dist_validation(dataloader, current_iter,
-                                 tb_logger, save_img, save_img_num)
+                                 tb_logger, save_img, save_img_names)
         else:
             self.nondist_validation(dataloader, current_iter, tb_logger,
-                                    save_img, save_img_num)
+                                    save_img, save_img_names)
 
     def get_current_log(self):
         return self.log_dict

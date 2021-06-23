@@ -108,6 +108,7 @@ train:
 val:
   val_freq: !!float 2e2
   save_img: true
+  save_img_names: [000014259, 000014400, 000014625, 000014785, 000014725, 000014863]
 
   metrics:
     psnr: # metric name, can be arbitrary

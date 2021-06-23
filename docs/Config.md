@@ -313,7 +313,8 @@ val:
   # Whether to save images during validation
   save_img: true
   # Number of images from validation dataset to save
-  save_img_num: 100
+  save_img_names: [image_name1, image_name2] or
+  save_img_names: [] # to save all images
   # Suffix for saved images. If None, use exp name
   suffix: ~
 
