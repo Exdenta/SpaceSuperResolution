@@ -1,21 +1,11 @@
 # Codebase Designs and Conventions
 
-[English](DesignConvention.md) **|** [简体中文](DesignConvention_CN.md)
-
 #### Contents
 
 1. [Overall Framework](#Overall-Framework)
 1. [Features](#Features)
     1. [Dynamic Instantiation](#Dynamic-Instantiation)
 1. [Conventions](#Conventions)
-
-## Overall Framework
-
-The `BasicSR` framework can be divided into the following parts: data, model, options/configs and training process. <br>
-When we modify or add a new method, we often modify/add it from the above aspects. <br>
-The figure below shows the overall framework.
-
-![overall_structure](../assets/overall_structure.png)
 
 ## Features
 

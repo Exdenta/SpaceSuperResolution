@@ -1,7 +1,5 @@
 # Configuration
 
-[English](Config.md) **|** [简体中文](Config_CN.md)
-
 #### Contents
 
 1. [Experiment Name Convention](#Experiment-Name-Convention)

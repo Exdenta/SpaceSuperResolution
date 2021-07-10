@@ -1,7 +1,5 @@
 # Metrics
 
-[English](Metrics.md) **|** [简体中文](Metrics_CN.md)
-
 ## PSNR and SSIM
 
 ## NIQE

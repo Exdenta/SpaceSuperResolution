@@ -1,7 +1,5 @@
 # Logging
 
-[English](Logging.md) **|** [简体中文](Logging_CN.md)
-
 #### Contents
 
 1. [Text Logger](#Text-Logger)

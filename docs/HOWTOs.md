@@ -1,7 +1,5 @@
 # HOWTOs
 
-[English](HOWTOs.md) **|** [简体中文](HOWTOs_CN.md)
-
 ## How to train StyleGAN2
 
 1. Prepare training dataset: [FFHQ](https://github.com/NVlabs/ffhq-dataset). More details are in [DatasetPreparation.md](DatasetPreparation.md#StyleGAN2)
@@ -23,26 +21,3 @@
     > python inference/inference_stylegan2.py
 
 1. The results are in the `samples` folder.
-
-## How to inference DFDNet
-
-1. Install [dlib](http://dlib.net/), because DFDNet uses dlib to do face recognition and landmark detection. [Installation reference](https://github.com/davisking/dlib).
-    1. Clone dlib repo: `git clone git@github.com:davisking/dlib.git`
-    1. `cd dlib`
-    1. Install: `python setup.py install`
-2. Download the dlib pretrained models from **ModelZoo** ([Google Drive](https://drive.google.com/drive/folders/15DgDtfaLASQ3iAPJEVHQF49g9msexECG?usp=sharing), [百度网盘](https://pan.baidu.com/s/1R6Nc4v3cl79XPAiK0Toe7g)) to the `experiments/pretrained_models/dlib` folder.<br>
-    You can download by run the following command OR manually download the pretrained models.
-
-    > python scripts/download_pretrained_models.py dlib
-
-3. Download pretrained DFDNet models, dictionary and face template from **ModelZoo** ([Google Drive](https://drive.google.com/drive/folders/15DgDtfaLASQ3iAPJEVHQF49g9msexECG?usp=sharing), [百度网盘](https://pan.baidu.com/s/1R6Nc4v3cl79XPAiK0Toe7g)) to the `experiments/pretrained_models/DFDNet` folder.<br>
-    You can download by run the the following command OR manually download the pretrained models.
-
-    > python scripts/download_pretrained_models.py DFDNet
-
-4. Prepare the testing dataset in the `datasets`, for example, we put images in the `datasets/TestWhole` folder.
-5. Test.
-
-    >  python inference/inference_dfdnet.py --upscale_factor=2 --test_path datasets/TestWhole
-
-6. The results are in the `results/DFDNet` folder.
