@@ -145,11 +145,11 @@ class VGGFeatureExtractor(nn.Module):
             # the mean is for image with range [0, 1]
             self.register_buffer(
                 'mean',
-                torch.Tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1))
+                torch.Tensor([0.08297, 0.07921, 0.05765, 0.18855]).view(1, 4, 1, 1))
             # the std is for image with range [0, 1]
             self.register_buffer(
                 'std',
-                torch.Tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
+                torch.Tensor([0.0855, 0.07087, 0.06563, 0.16077]).view(1, 4, 1, 1))
 
     def forward(self, x):
         """Forward function.

@@ -1,5 +1,5 @@
 # general settings
-name: 058_ESRGAN_x4_30sm_Argis_gauss_001_speckle_001_pretrained
+name: 002_ESRGAN_x4_30sm_Argis_gauss_001_speckle_001_pretrained
 model_type: ESRGANModel
 scale: 4
 num_gpu: 1  # set num_gpu: 0 for cpu mode
