@@ -40,8 +40,8 @@ def tensor2img(tensor, rgb2bgr=True, out_type=np.uint8, min_max=(0, 1)):
 
     Args:
         tensor (Tensor or list[Tensor]): Accept shapes:
-            1) 4D mini-batch Tensor of shape (B x 3/1 x H x W);
-            2) 3D Tensor of shape (3/1 x H x W);
+            1) 4D mini-batch Tensor of shape (B x 4/3/1 x H x W);
+            2) 3D Tensor of shape (4/3/1 x H x W);
             3) 2D Tensor of shape (H x W).
             Tensor channel should be in RGB order.
         rgb2bgr (bool): Whether to change rgb to bgr.
@@ -80,7 +80,7 @@ def tensor2img(tensor, rgb2bgr=True, out_type=np.uint8, min_max=(0, 1)):
             img_np = img_np.transpose(1, 2, 0)
             if img_np.shape[2] == 1:  # gray image
                 img_np = np.squeeze(img_np, axis=2)
-            else:
+            elif img_np.shape[2] == 3:  # rgb image:
                 if rgb2bgr:
                     img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
         elif n_dim == 2:
@@ -98,7 +98,7 @@ def tensor2img(tensor, rgb2bgr=True, out_type=np.uint8, min_max=(0, 1)):
     return result
 
 
-def imfrombytes(content, flag='color', float32=False):
+def imfrombytes(content, flag='unchanged', float32=False):
     """Read an image from bytes.
 
     Args:
@@ -119,7 +119,8 @@ def imfrombytes(content, flag='color', float32=False):
     }
     img = cv2.imdecode(img_np, imread_flags[flag])
     if float32:
-        img = img.astype(np.float32) / 255.
+        img_range = img.max() - img.min()
+        img = (img.astype(np.float32) - img.min()) / img_range
     return img
 
 

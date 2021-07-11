@@ -23,7 +23,7 @@ class EDSR(nn.Module):
         res_scale (float): Used to scale the residual in residual block.
             Default: 1.
         img_range (float): Image range. Default: 255.
-        rgb_mean (tuple[float]): Image mean in RGB orders.
+        channels_mean (tuple[float]): Image mean in RGB orders.
             Default: (0.4488, 0.4371, 0.4040), calculated from DIV2K dataset.
     """
 
@@ -35,11 +35,11 @@ class EDSR(nn.Module):
                  upscale=4,
                  res_scale=1,
                  img_range=255.,
-                 rgb_mean=(0.4488, 0.4371, 0.4040)):
+                 channels_mean=(0.4488, 0.4371, 0.4040)):
         super(EDSR, self).__init__()
 
         self.img_range = img_range
-        self.mean = torch.Tensor(rgb_mean).view(1, 3, 1, 1)
+        self.mean = torch.Tensor(channels_mean).view(1, num_in_ch, 1, 1)
 
         self.conv_first = nn.Conv2d(num_in_ch, num_feat, 3, 1, 1)
         self.body = make_layer(

@@ -82,10 +82,16 @@ class PairedImageDataset(data.Dataset):
         # image range: [0, 1], float32.
         gt_path = self.paths[index]['gt_path']
         img_bytes = self.file_client.get(gt_path, 'gt')
-        img_gt = imfrombytes(img_bytes, float32=True)
+        img_gt = imfrombytes(img_bytes, flag='unchanged', float32=True)
         lq_path = self.paths[index]['lq_path']
         img_bytes = self.file_client.get(lq_path, 'lq')
-        img_lq = imfrombytes(img_bytes, float32=True)
+        img_lq = imfrombytes(img_bytes, flag='unchanged', float32=True)
+
+        # print(img_gt.shape)
+        # if(img_gt.shape[1] == img_gt.shape[2]):
+        #     img_gt.permute(2, 0, 1)
+        # print(img_gt.shape)
+        # exit(0)
 
         # augmentation for training
         if self.opt['phase'] == 'train':
@@ -102,6 +108,7 @@ class PairedImageDataset(data.Dataset):
         img_gt, img_lq = img2tensor([img_gt, img_lq],
                                     bgr2rgb=True,
                                     float32=True)
+
         # normalize
         if self.mean is not None or self.std is not None:
             normalize(img_lq, self.mean, self.std, inplace=True)

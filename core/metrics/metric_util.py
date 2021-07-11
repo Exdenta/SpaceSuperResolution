@@ -41,7 +41,10 @@ def to_y_channel(img):
         (ndarray): Images with range [0, 255] (float type) without round.
     """
     img = img.astype(np.float32) / 255.
-    if img.ndim == 3 and img.shape[2] == 3:
+    if img.ndim == 3 and img.shape[2] == 3:  # if rgb
         img = bgr2ycbcr(img, y_only=True)
+        img = img[..., None]
+    elif img.shape[2] > 3:  # if has more channels
+        img = bgr2ycbcr(img[:, :, 0:3], y_only=True)
         img = img[..., None]
     return img * 255.

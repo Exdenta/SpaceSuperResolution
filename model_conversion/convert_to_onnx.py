@@ -176,7 +176,7 @@ def convert_edsr_model(pytorch_model_path: str, onnx_save_path: str, device: str
     """
 
     net = EDSR(3, 3, num_feat=256, num_block=32, upscale=4, res_scale=0.1,
-               img_range=255., rgb_mean=[0.4488, 0.4371, 0.4040])
+               img_range=255., channels_mean=[0.4488, 0.4371, 0.4040])
     net_state = torch.load(pytorch_model_path, map_location=device)['params']
     net.load_state_dict(net_state)
     net.eval()
@@ -213,7 +213,7 @@ def test_edsr_model(pytorch_model_path: str, onnx_model_path: str, result_dirnam
     #
 
     net = EDSR(3, 3, num_feat=256, num_block=32, upscale=4, res_scale=0.1,
-               img_range=255., rgb_mean=[0.4488, 0.4371, 0.4040])
+               img_range=255., channels_mean=[0.4488, 0.4371, 0.4040])
     net_state = torch.load(pytorch_model_path, map_location=device)
     net.load_state_dict(net_state["params"])
     # net.load_state_dict(pytorch_model_path)

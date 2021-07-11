@@ -7,6 +7,7 @@ import time
 import torch
 import os
 import cv2
+import tifffile
 from os import path as osp
 
 from core.data import build_dataloader, build_dataset
@@ -161,12 +162,14 @@ def train_pipeline(root_path):
         image_name = osp.join(image_name, image_name)
         # save gt image
         image_gt_name = image_name + "_gt." + image_extension
-        image = cv2.imread(osp.join(gt_images_dir, image_path))
+        image = cv2.imread(
+            osp.join(gt_images_dir, image_path), cv2.IMREAD_UNCHANGED)
         w, h, _ = image.shape
         cv2.imwrite(osp.join(vis_dir, image_gt_name), image)
         # save interpolated image
         interpolated_image_name = image_name + "_interpolated." + image_extension
-        image = cv2.imread(osp.join(lq_images_dir, image_path))
+        image = cv2.imread(
+            osp.join(lq_images_dir, image_path), cv2.IMREAD_UNCHANGED)
         image = cv2.resize(image, (w, h), interpolation=cv2.INTER_CUBIC)
         cv2.imwrite(osp.join(vis_dir, interpolated_image_name), image)
 

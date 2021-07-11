@@ -1,7 +1,10 @@
 import torch
 from collections import OrderedDict
 from os import path as osp
+import numpy as np
 from tqdm import tqdm
+import cv2
+import tifffile
 
 from core.archs import build_network
 from core.losses import build_loss
@@ -130,6 +133,9 @@ class SRModel(BaseModel):
 
         for idx, val_data in enumerate(dataloader):
             img_name = osp.splitext(osp.basename(val_data['lq_path'][0]))[0]
+            img_extension = osp.splitext(
+                osp.basename(val_data['lq_path'][0]))[1]
+
             self.feed_data(val_data)
             self.test()
 
@@ -144,21 +150,29 @@ class SRModel(BaseModel):
             del self.output
             torch.cuda.empty_cache()
 
+            # save all images for visualization if none were explicitely chosen
+            # or save only chosen images
             if save_img and ((img_name in save_img_names) or not save_img_names):
                 if self.opt['is_train']:
                     save_img_path = osp.join(self.opt['path']['visualization'],
                                              img_name,
-                                             f'{img_name}_{current_iter}.png')
+                                             f'{img_name}_{current_iter}{img_extension}')
                 else:
                     if self.opt['val']['suffix']:
                         save_img_path = osp.join(
                             self.opt['path']['visualization'], dataset_name,
-                            f'{img_name}_{self.opt["val"]["suffix"]}.png')
+                            f'{img_name}_{self.opt["val"]["suffix"]}{img_extension}')
                     else:
                         save_img_path = osp.join(
                             self.opt['path']['visualization'], dataset_name,
-                            f'{img_name}_{self.opt["name"]}.png')
-                imwrite(sr_img, save_img_path)
+                            f'{img_name}_{self.opt["name"]}{img_extension}')
+
+                save_sr_img = sr_img.astype(np.float32)
+                img_range = save_sr_img.max() - save_sr_img.min()
+                save_sr_img = (save_sr_img.astype(
+                    np.float32) - save_sr_img.min()) / img_range
+                save_sr_img = (save_sr_img * 255).astype(np.uint8)
+                cv2.imwrite(save_img_path, save_sr_img)
 
             if with_metrics:
                 # calculate metrics
